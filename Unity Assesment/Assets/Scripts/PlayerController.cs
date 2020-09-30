@@ -10,8 +10,11 @@ public class PlayerController : MonoBehaviour
 
     bool isHoldingObject;
 
+    bool canWalk = true;
+
     float yRotation;
     float xRotation;
+
 
     #region Unity Functions
     // Start is called before the first frame update
@@ -32,12 +35,15 @@ public class PlayerController : MonoBehaviour
 
     public void Move(Vector2 direction)
     {
-        Debug.Log(direction);
+        if (!canWalk) return;
+
         _rigidbody.velocity = (transform.forward * -direction.y) + (transform.right * -direction.x);
     }
 
     public void Look(Vector2 direction)
     {
+
+        if (!canWalk) return;
         yRotation += direction.y;
         xRotation += -direction.x;
 
@@ -59,6 +65,11 @@ public class PlayerController : MonoBehaviour
     public void SetIsHoldingObjectBool(bool state)
     {
         isHoldingObject = state;
+    }
+
+    public void SetCanWalkBool(bool state)
+    {
+        canWalk = state;
     }
 
     #endregion

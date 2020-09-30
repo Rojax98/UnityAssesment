@@ -38,6 +38,7 @@ public class InteractableObject : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if(_playerInventoryReference.CheckIfActive() == false)
         _tapCount += 1;
         _startTimer = true;
     }
@@ -55,8 +56,15 @@ public class InteractableObject : MonoBehaviour
             }
             else 
             {
-                _playerInventoryReference.AddItemToInventory(InventoryObj);
-                Destroy(gameObject);
+                if (_playerInventoryReference.CheckInventoryCount() < 11)
+                {
+                    _playerInventoryReference.AddItemToInventory(InventoryObj);
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    Debug.Log("No Inventory Spaces Left");
+                }
             }
         }
         else

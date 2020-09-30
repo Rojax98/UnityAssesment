@@ -58,7 +58,7 @@ public class InputManager : MonoBehaviour
 
             if(_setLeftTouch == true)
             {
-                if(_leftTouchNumber != -1 && Input.GetTouch(_leftTouchNumber).phase == TouchPhase.Ended)
+                if(Input.GetTouch(_leftTouchNumber).phase == TouchPhase.Ended)
                 {
                     _leftTouchNumber = -1;
                     _setLeftTouch = false;
@@ -68,12 +68,14 @@ public class InputManager : MonoBehaviour
                 Vector2 Distance = _firstLeftTapPos - Input.GetTouch(_leftTouchNumber).position;
                 Distance = Distance.normalized * _moveSpeed;
 
-                _playerControllerReference.Move(Distance);
+                //if outside of deadzone
+                if(Distance.sqrMagnitude > 0.2f)
+                    _playerControllerReference.Move(Distance);
             }
 
             if(_setRightTouch == true)
             {
-                if (_rightTouchNumber != -1 && Input.GetTouch(_rightTouchNumber).phase == TouchPhase.Ended)
+                if (Input.GetTouch(_rightTouchNumber).phase == TouchPhase.Ended)
                 {
                     _rightTouchNumber = -1;
                     _setRightTouch = false;
@@ -82,9 +84,14 @@ public class InputManager : MonoBehaviour
 
                 Vector2 Distance = _firstRightTapPos - Input.GetTouch(_rightTouchNumber).position;
 
-                Distance = Distance.normalized * _lookSpeed;
+                //deadzone
+                if (Distance.magnitude > 10)
+                {
+                    Distance = Distance.normalized * _lookSpeed;
 
-                _playerControllerReference.Look(Distance);
+                    if (Distance.sqrMagnitude > 0.2f)
+                        _playerControllerReference.Look(Distance);
+                }
             }
 
         }
