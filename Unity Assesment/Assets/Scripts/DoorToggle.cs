@@ -6,35 +6,42 @@ using UnityEngine.EventSystems;
 public class DoorToggle : MonoBehaviour
 {
 
-    enum State { OPEN, CLOSED };
+    public enum State { OPEN, CLOSED };
 
-    State currentState;
+    public State currentState;
+
+    Transform _doorHingeTransform;
 
     // Start is called before the first frame update
     void Start()
     {
         currentState = State.CLOSED;
+        _doorHingeTransform = transform.GetChild(0).transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        checkIfTouched();
+        AnimateDoor();
     }
 
-    void checkIfTouched()
+    void AnimateDoor()
     {
-        foreach (Touch touch in Input.touches)
+        if(currentState == State.OPEN)
         {
-            int id = touch.fingerId;
-            if (EventSystem.current.IsPointerOverGameObject(id))
+            if(_doorHingeTransform.eulerAngles.y < 90)
             {
-                if (currentState == State.CLOSED)
-                    currentState = State.OPEN;
-                else
-                    currentState = State.CLOSED;
-
+                _doorHingeTransform.Rotate(0, 3, 0);
+            }
+        }
+        else
+        {
+            if (_doorHingeTransform.eulerAngles.y > 1)
+            {
+                _doorHingeTransform.Rotate(0, -3, 0);
             }
         }
     }
+
+    
 }

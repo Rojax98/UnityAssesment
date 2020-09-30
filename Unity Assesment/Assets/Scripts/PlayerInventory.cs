@@ -7,6 +7,8 @@ public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] List<ObjectScript> _itemsInInventory = new List<ObjectScript>();
 
+    Image _backgroundTint;
+
     #region Unity Functions
     // Start is called before the first frame update
     void Start()
@@ -19,6 +21,8 @@ public class PlayerInventory : MonoBehaviour
                     = _itemsInInventory[i].objectName;
             }
         }
+
+        _backgroundTint = GameObject.Find("background").GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -36,6 +40,27 @@ public class PlayerInventory : MonoBehaviour
         var spawnedObject = Instantiate(_itemsInInventory[itemNumber].prefab);
 
         spawnedObject.transform.position = spawnPoint;
+    }
+
+    public void ToggleShowHide()
+    {
+        _backgroundTint.enabled = !_backgroundTint.enabled;
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.active = 
+                !transform.GetChild(i).gameObject.active;
+        }
+    }
+
+    public void AddItemToInventory(ObjectScript ObjectToAdd)
+    {
+        _itemsInInventory.Add(ObjectToAdd);
+    }
+
+    public void RemoveItemFromInventory(ObjectScript ObjectToRemove)
+    {
+        _itemsInInventory.Remove(ObjectToRemove);
     }
 
     #endregion

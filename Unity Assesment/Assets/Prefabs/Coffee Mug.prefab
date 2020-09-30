@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5333287221621610519}
   - component: {fileID: 2250513434650597975}
   - component: {fileID: -5098555679255941447}
+  - component: {fileID: -4530378680356099619}
   m_Layer: 0
   m_Name: Coffee Mug
   m_TagString: Untagged
@@ -110,3 +111,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-4530378680356099619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5356204445870381805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab6b83da3e3bc840b0940d9dc16486d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InventoryObj: {fileID: 11400000, guid: 9a80174ce908c0a49b51a6726abb9db5, type: 2}

@@ -29,7 +29,7 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        TouchInput();
     }
     #endregion
 
@@ -52,30 +52,32 @@ public class InputManager : MonoBehaviour
                 {
                     _rightTouchNumber = i;
                     _firstRightTapPos = Input.GetTouch(i).position;
-                    _setLeftTouch = true;
+                    _setRightTouch = true;
                 }
             }
 
             if(_setLeftTouch == true)
             {
-                if(Input.GetTouch(_leftTouchNumber).phase == TouchPhase.Ended)
+                if(_leftTouchNumber != -1 && Input.GetTouch(_leftTouchNumber).phase == TouchPhase.Ended)
                 {
                     _leftTouchNumber = -1;
                     _setLeftTouch = false;
+                    return;
                 }
 
                 Vector2 Distance = _firstLeftTapPos - Input.GetTouch(_leftTouchNumber).position;
-                Distance = Distance * _moveSpeed;
+                Distance = Distance.normalized * _moveSpeed;
 
                 _playerControllerReference.Move(Distance);
             }
 
             if(_setRightTouch == true)
             {
-                if (Input.GetTouch(_rightTouchNumber).phase == TouchPhase.Ended)
+                if (_rightTouchNumber != -1 && Input.GetTouch(_rightTouchNumber).phase == TouchPhase.Ended)
                 {
                     _rightTouchNumber = -1;
                     _setRightTouch = false;
+                    return;
                 }
 
                 Vector2 Distance = _firstRightTapPos - Input.GetTouch(_rightTouchNumber).position;
@@ -84,7 +86,14 @@ public class InputManager : MonoBehaviour
 
                 _playerControllerReference.Look(Distance);
             }
-            
+
+        }
+        else
+        {
+            _leftTouchNumber = -1;
+            _setLeftTouch = false;
+            _rightTouchNumber = -1;
+            _setRightTouch = false;
         }
     }
 
