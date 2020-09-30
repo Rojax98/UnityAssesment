@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d57c234078ce24998f3ac7878a054e, type: 3}
   m_Name: DeskLamp
   m_EditorClassIdentifier: 
-  objectName: 
-  prefab: {fileID: 0}
+  objectName: Desk Lamp
+  prefab: {fileID: 1590216482022034, guid: af66cb781f2abe44abe97b567b10153a, type: 3}

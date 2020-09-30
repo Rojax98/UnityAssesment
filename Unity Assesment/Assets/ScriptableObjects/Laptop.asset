@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d57c234078ce24998f3ac7878a054e, type: 3}
   m_Name: Laptop
   m_EditorClassIdentifier: 
-  objectName: 
-  prefab: {fileID: 0}
+  objectName: Laptop
+  prefab: {fileID: 1163334601776374, guid: 88cbb557f01af264c8417bbd28ff33c4, type: 3}

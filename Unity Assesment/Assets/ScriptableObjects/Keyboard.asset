@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d57c234078ce24998f3ac7878a054e, type: 3}
   m_Name: Keyboard
   m_EditorClassIdentifier: 
-  objectName: 
-  prefab: {fileID: 0}
+  objectName: Keyboard
+  prefab: {fileID: 1558308838075884, guid: 1ae56147953582b4280b244e7064132d, type: 3}

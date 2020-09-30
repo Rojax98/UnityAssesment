@@ -15,6 +15,8 @@ public class TutorialManager : MonoBehaviour
 
     bool hasPickedUpObject;
 
+    int lastInventoryCount;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +24,7 @@ public class TutorialManager : MonoBehaviour
         _playerInventoryReference = GameObject.FindObjectOfType<PlayerInventory>();
 
         _tutorialText = transform.GetChild(0).GetComponent<Text>();
+        lastInventoryCount = _playerInventoryReference.CheckInventoryCount();
 
     }
 
@@ -44,9 +47,11 @@ public class TutorialManager : MonoBehaviour
         }
         else
         {
+           
             _tutorialText.text = "Double tap an object to place it in your inventory";
-            if (_playerInventoryReference.CheckInventoryCount() > 0)
+            if (_playerInventoryReference.CheckInventoryCount() > lastInventoryCount)
                 gameObject.active = false;
+            lastInventoryCount = _playerInventoryReference.CheckInventoryCount();
         }
     }
 }

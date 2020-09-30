@@ -56,7 +56,7 @@ public class InteractableObject : MonoBehaviour
             }
             else 
             {
-                if (_playerInventoryReference.CheckInventoryCount() < 11)
+                if (_playerInventoryReference.CheckInventoryCount() < 10)
                 {
                     _playerInventoryReference.AddItemToInventory(InventoryObj);
                     Destroy(gameObject);

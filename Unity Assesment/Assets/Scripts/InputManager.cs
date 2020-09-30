@@ -44,14 +44,16 @@ public class InputManager : MonoBehaviour
                 if(CheckScreenSideOfInput(i) == -1 && !_setLeftTouch && i != _rightTouchNumber)
                 {
                     _leftTouchNumber = i;
-                    _firstLeftTapPos = Input.GetTouch(i).position;
+                    if(Input.GetTouch(i).phase == TouchPhase.Began)
+                        _firstLeftTapPos = Input.GetTouch(i).position;
                     _setLeftTouch = true;
                 }
 
                 if (CheckScreenSideOfInput(i) == 1 && !_setRightTouch && i != _leftTouchNumber)
                 {
                     _rightTouchNumber = i;
-                    _firstRightTapPos = Input.GetTouch(i).position;
+                    if (Input.GetTouch(i).phase == TouchPhase.Began)
+                        _firstRightTapPos = Input.GetTouch(i).position;
                     _setRightTouch = true;
                 }
             }
@@ -60,7 +62,7 @@ public class InputManager : MonoBehaviour
             {
                 if(Input.GetTouch(_leftTouchNumber).phase == TouchPhase.Ended)
                 {
-                    _leftTouchNumber = -1;
+                    _setRightTouch = false;
                     _setLeftTouch = false;
                     return;
                 }
@@ -72,12 +74,16 @@ public class InputManager : MonoBehaviour
                 if(Distance.sqrMagnitude > 0.2f)
                     _playerControllerReference.Move(Distance);
             }
+            else
+                _leftTouchNumber = -1;
+            
 
             if(_setRightTouch == true)
             {
+
                 if (Input.GetTouch(_rightTouchNumber).phase == TouchPhase.Ended)
                 {
-                    _rightTouchNumber = -1;
+                    _setLeftTouch = false;
                     _setRightTouch = false;
                     return;
                 }
@@ -93,14 +99,17 @@ public class InputManager : MonoBehaviour
                         _playerControllerReference.Look(Distance);
                 }
             }
+            else
+                _rightTouchNumber = -1;
+            
 
         }
         else
         {
-            _leftTouchNumber = -1;
-            _setLeftTouch = false;
-            _rightTouchNumber = -1;
             _setRightTouch = false;
+            _setLeftTouch = false;
+            _leftTouchNumber = -1;
+            _rightTouchNumber = -1;
         }
     }
 
